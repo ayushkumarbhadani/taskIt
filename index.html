@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./beauty/style.css"> 
+  <title>Document</title>
+</head>
+<body>
+  <main>
+    <div class="left">
+      <div class="calender">
+        <table>
+          <tbody>
+            <tr>
+              <td colspan="7" class="todays-date"></td>
+            </tr>
+            <tr>
+              <td><button class="prev-month" title="Previous month"><</button></td>
+              <td colspan="5" class="current-month"></td>
+              <td><button class="next-month" title="Next month">></button></td>
+            </tr>
+
+            <tr class="days">
+              <td>S</td>
+              <td>M</td>
+              <td>T</td>
+              <td>W</td>
+              <td>T</td>
+              <td>F</td>
+              <td>S</td>
+            </tr>
+          </tbody>
+          <tbody class="calenderDates"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="right task-manager">
+      <div class="task-manager-month"></div>
+      <div class="task-manager-table-wrapper">
+        <table>
+          <tbody class="task-mamager-table-body">
+            <tr class="task-manager-table-date">
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+  <script src="./form/script.js"></script>
+</body>
+</html>

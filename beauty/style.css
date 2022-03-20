@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 10px;
+  box-sizing: border-box;
+}
+main {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  /* justify-content: center; */
+  gap: 1rem;
+  overflow-x: hidden;
+}
+.left {
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  /* width: 30vw; */
+  width: max-content;
+}
+.right {
+  /* width: calc(100vw - max-content); */
+  /* min-width: fit-content; */
+  height: 100vh;
+  overflow: scroll;
+}
+.task-manager-table-wrapper {
+  overflow: scroll;
+  height: inherit;
+}
+.task-manager-table-date {
+  position: sticky;
+  top: 0;
+}
+.calender {
+  width: max-content;
+}
+.calender table {
+  text-align: center;
+  overflow: auto;
+}
+
+.calender table td,
+.calender table th {
+  padding: 1rem;
+  cursor: default;
+  border-radius: 0.2rem;
+}
+.todays-date {
+  font-weight: bold;
+}
+.today {
+  background-color: rgb(123, 101, 245);
+  color: aliceblue;
+  padding: 1rem;
+  border-radius: 0.2rem;
+}
+[data-date]:hover:not(.today),
+.active {
+  background-color: rgb(64, 133, 223);
+  color: aliceblue;
+  transition: all 0.25s;
+}
+.calender button {
+  padding: 0.5rem;
+  background-color: #00000000;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+.task-manager-month {
+  font-size: 3rem;
+  font-weight: lighter;
+  padding: 2rem 0;
+  cursor: default;
+  position: relative;
+  top: 0;
+  /* left: 0; */
+}
+.task-manager table {
+  border: 1px solid #a0a0a0;
+  border-collapse: collapse;
+  overflow: auto;
+  width: max-content;
+}
+.task-manager table th,
+.task-manager table td {
+  padding: 2rem;
+  width: 20rem;
+  border: 1px solid #a0a0a0;
+}
+/* .task-manager table td {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+} */
+.task-manager-time,
+th {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: #f0f6ff;
+  /* color: #fff; */
+  border: 1px solid #d0d0d0;
+}
+.task-manager tr td > span {
+  margin: 1rem;
+  background-color: red;
+  width: max-content;
+  padding: 1rem;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  gap: 1rem;
+  font-size: 14px;
+}
+.task-manager table tr td input {
+  width: max-content;
+  outline: none;
+  border: none;
+}
