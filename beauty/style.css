@@ -124,3 +124,22 @@ th {
   outline: none;
   border: none;
 }
+
+@media only screen and (max-width: 600px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+  .left {
+    height: max-content;
+  }
+  .right {
+    width: 95vw !important;
+  }
+  .task-manager table th,
+  .task-manager table td {
+    width: 5rem;
+    max-width: fit-content;
+    padding: 1rem;
+  }
+}
