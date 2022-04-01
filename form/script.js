@@ -14,11 +14,18 @@ const addTaskDivCloseBtn = document.querySelector(".add-task-div-close-btn");
 const addTaskDivDone = document.querySelector(".add-task-div-done");
 const addTaskTitleInput = document.querySelector(".add-task-title-input");
 const addTaskDescTextarea = document.querySelector(".add-task-title-input");
+
 //setting up the width of task manager table parent (right section)
 let rightContainerWidth =
   document.querySelector("main").clientWidth -
   document.querySelector(".left").clientWidth;
 document.querySelector(".right").style.width = `${rightContainerWidth}px`;
+window.addEventListener("resize", () => {
+  rightContainerWidth =
+    document.querySelector("main").clientWidth -
+    document.querySelector(".left").clientWidth;
+  document.querySelector(".right").style.width = `${rightContainerWidth}px`;
+});
 
 const monthName = [
   "January",
@@ -230,10 +237,14 @@ function createTaskManagerTable(year, month, date) {
       colorArray[Math.floor(Math.random() * colorArray.length)]
     }">Testing...</span>`;
     item.addEventListener("click", (e) => {
+      addTaskDiv.setAttribute(
+        "data-fetchtask",
+        e.target.dataset.fetchtask || e.target.parentElement.dataset.fetchtask
+      );
       addTaskDiv.style.display = "flex";
       addTaskDiv.style.opacity = "1";
       console.dir(e.target.innerText);
-      console.dir(addTaskDiv);
+      console.dir(e);
       addTaskTitleInput.value = e.target.innerText;
       addTaskDescTextarea.value = e.target.innerText;
     });
@@ -250,6 +261,15 @@ function createTaskManagerTable(year, month, date) {
     addTaskDiv.style.transition = "all .25s ease-in-out";
     addTaskDiv.style.opacity = "0";
     setTimeout(() => {
+      console.log(addTaskDiv.dataset.fetchtask);
+      document.querySelector(
+        `[data-fetchtask="${addTaskDiv.dataset.fetchtask}"]`
+      ).innerHTML =
+        addTaskTitleInput.value != ""
+          ? `<span class="task-heading" style="background-color:${
+              colorArray[Math.floor(Math.random() * colorArray.length)]
+            }">${addTaskTitleInput.value}</span>`
+          : ``;
       addTaskDiv.style.display = "none";
     }, 250);
   });
