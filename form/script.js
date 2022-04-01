@@ -9,7 +9,11 @@ const taskManagerMonth = document.querySelector(".task-manager-month");
 const taskManagerTable = document.querySelector(".task-manager>table");
 const taskManagerTableBody = document.querySelector(".task-mamager-table-body");
 const taskManagerTableDate = document.querySelector(".task-manager-table-date");
-
+const addTaskDiv = document.querySelector(".add-task-div");
+const addTaskDivCloseBtn = document.querySelector(".add-task-div-close-btn");
+const addTaskDivDone = document.querySelector(".add-task-div-done");
+const addTaskTitleInput = document.querySelector(".add-task-title-input");
+const addTaskDescTextarea = document.querySelector(".add-task-title-input");
 //setting up the width of task manager table parent (right section)
 let rightContainerWidth =
   document.querySelector("main").clientWidth -
@@ -30,7 +34,7 @@ const monthName = [
   "November",
   "December",
 ];
-const dayName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fir", "Sat"];
+const dayName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const today = new Date();
 todayContainer.innerHTML = `Today ${
@@ -143,18 +147,30 @@ function createTaskManagerTable(year, month, date) {
   taskManagerMonth.textContent = `${monthName[month]} ${year}`;
   taskManagerTableDate.innerHTML = ``;
   for (let i = 0; i <= lastDateOfThisMonth; i++) {
+    const d = new Date();
+    d.setFullYear(year, month, i);
     if (i === 0) {
       taskManagerTableDate.innerHTML += `<th></th>`;
       continue;
     }
     if (i < 10) {
       if (i == today.getDate() && month == today.getMonth()) {
-        taskManagerTableDate.innerHTML += `<th><span class="today" id="today">0${i}</span></th>`;
-      } else taskManagerTableDate.innerHTML += `<th><span>0${i}</span></th>`;
+        taskManagerTableDate.innerHTML += `<th><span class="today" id="today">0${i}<br>${
+          dayName[d.getDay()]
+        }</span></th>`;
+      } else
+        taskManagerTableDate.innerHTML += `<th><span>0${i}<br>${
+          dayName[d.getDay()]
+        }</span></th>`;
     } else {
       if (i == today.getDate() && month == today.getMonth()) {
-        taskManagerTableDate.innerHTML += `<th><span class="today" id="today">${i}</span></th>`;
-      } else taskManagerTableDate.innerHTML += `<th><span>${i}</span></th>`;
+        taskManagerTableDate.innerHTML += `<th><span class="today" id="today">${i}<br>${
+          dayName[d.getDay()]
+        }</span></th>`;
+      } else
+        taskManagerTableDate.innerHTML += `<th><span>${i}<br>${
+          dayName[d.getDay()]
+        }</span></th>`;
     }
   }
   const getAllTableRow = [
@@ -180,11 +196,61 @@ function createTaskManagerTable(year, month, date) {
     tr.appendChild(th);
     for (let j = 1; j <= lastDateOfThisMonth; j++) {
       const td = document.createElement("td");
-      td.setAttribute("data-fetch-task", `${year}/${month}/${j}/${i}`);
+      td.setAttribute("data-fetchtask", `${year}/${month}/${j}/${i}`);
       tr.appendChild(td);
     }
     //   td.setAttribute("data-task", `${i}`); //link-format:  year/month/date/time    eg: 2022/03/19/15       time in 24-hr format
 
     taskManagerTableBody.appendChild(tr);
   }
+  const td = [...document.querySelectorAll(".task-manager-table-wrapper td")];
+  const colorArray = [
+    "#f44336",
+    "#e91e63",
+    "#9c27b0",
+    "#673ab7",
+    "#3f51b5",
+    "#2196f3",
+    "#00bcd4",
+    "#009688",
+    "#4caf50",
+    "#8bc34a",
+    "#ffc107",
+    "#ff9800",
+    "#ff5722",
+    "#795548",
+    "#607d8b",
+  ];
+  console.log(td);
+  console.log();
+  console.log(Math.random() * colorArray.length);
+  td.forEach((item) => {
+    // item.innerHTML = item.dataset.fetchtask;
+    item.innerHTML = `<span class="task-heading" style="background-color:${
+      colorArray[Math.floor(Math.random() * colorArray.length)]
+    }">Testing...</span>`;
+    item.addEventListener("click", (e) => {
+      addTaskDiv.style.display = "flex";
+      addTaskDiv.style.opacity = "1";
+      console.dir(e.target.innerText);
+      console.dir(addTaskDiv);
+      addTaskTitleInput.value = e.target.innerText;
+      addTaskDescTextarea.value = e.target.innerText;
+    });
+  });
+
+  addTaskDivCloseBtn.addEventListener("click", () => {
+    addTaskDiv.style.transition = "all .25s ease-in-out";
+    addTaskDiv.style.opacity = "0";
+    setTimeout(() => {
+      addTaskDiv.style.display = "none";
+    }, 250);
+  });
+  addTaskDivDone.addEventListener("click", () => {
+    addTaskDiv.style.transition = "all .25s ease-in-out";
+    addTaskDiv.style.opacity = "0";
+    setTimeout(() => {
+      addTaskDiv.style.display = "none";
+    }, 250);
+  });
 }
